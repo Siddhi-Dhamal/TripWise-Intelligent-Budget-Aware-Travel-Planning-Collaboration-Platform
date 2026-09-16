@@ -1,0 +1,18 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: tripwise
+      POSTGRES_PASSWORD: tripwise_local_dev
+      POSTGRES_DB: tripwise
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://tripwise:tripwise_local_dev@db:5432/tripwise
+    depends_on:
+      - db
