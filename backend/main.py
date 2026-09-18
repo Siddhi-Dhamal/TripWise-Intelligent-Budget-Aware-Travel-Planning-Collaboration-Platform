@@ -1,3 +1,5 @@
+from model import Base, engine
+Base.metadata.create_all(engine)
 import os
 import psycopg2
 from fastapi import FastAPI
